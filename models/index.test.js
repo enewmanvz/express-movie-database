@@ -25,9 +25,10 @@ describe('Movie Database', () => {
         const arrayOfCrews =[
            {name: 'Joss Whedon', crewCredit: 'Director', filmography: 'Writer|Producer|Director', knownFor: 'Writer-Buffy the Vampire Slayer', numfilmCredit: 17},
            {name: 'Zak Penn', crewCredit: 'Writer', filmography: 'Writer|Producer|Actor', knownFor: 'Writer-X2: X-Men United', numfilmCredit: 23},
-           {name: 'Malcom Lee', crewCredit: 'Director', filmography: 'Director|Producer|Writer', knownFor: "Director-Girl's Trip", numfilmCredit: 20},
            {name: 'Jon Favreau', crewCredit: 'Producer', filmography: 'Producer|Actor|Director', knownFor: 'Poducer-Iron Man', numfilmCredit: 32},
-           {name: 'Malcom Lee', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
+           {name: 'Malcom Lee', crewCredit: 'Director', filmography: 'Director|Producer|Writer', knownFor: "Director-Girl's Trip", numfilmCredit: 20},
+           {name: 'Malcom D.Lee', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
+           {name: 'John Roberts', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
         ]    
         //add arrays to database
         await Movie.bulkCreate(arrayOfMovies)
@@ -66,26 +67,71 @@ describe('Movie Database', () => {
         expect(testMovie2.genre).toBe('Drama')
     })
 
-        test('Movies can have many Casts', async()=> {
+        test('Movies have many Casts and Crew', async()=> {
         //read test Movie instance from db
-        const testMovie = await Movie.findOne({where: {title: 'Avengers'}});        
+        const testMovie = await Movie.findOne({where: {title: 'Avengers'}});
+        const testMovie2 = await Movie.findOne({where: {title: 'The Best Man'}});        
         const testCast1 = await Cast.findOne({where: {name: 'Robert Downey Jr.'}})
         const testCast2 = await Cast.findOne({where: {name: 'Scarlet Johansson'}})
         const testCast3 = await Cast.findOne({where: {name: 'Chris Evans'}})
+        
+        const testCast4 = await Cast.findOne({where: {name: 'Sanaa Lathan'}})
+        const testCast5 = await Cast.findOne({where: {name: 'Morris Chestnut'}})
+        const testCast6 = await Cast.findOne({where: {name: 'Regina Hall'}})
+
+        const testCrew1 = await Crew.findOne({where: {name: 'Joss Whedon'}})
+        const testCrew2 = await Crew.findOne({where: {name: 'Zak Penn'}})
+        const testCrew3 = await Crew.findOne({where: {name: 'Jon Favreau'}})
+
+        const testCrew4 = await Crew.findOne({where: {name: 'Malcom Lee'}})
+        const testCrew5 = await Crew.findOne({where: {name: 'Malcom D.Lee'}})
+        const testCrew6 = await Crew.findOne({where: {name: 'John Roberts'}})
 
         await testMovie.addCast(testCast1)
         await testMovie.addCast(testCast2)
         await testMovie.addCast(testCast3)
 
-        //retrieve list of Casts in this Movie
+        await testMovie2.addCast(testCast4)
+        await testMovie2.addCast(testCast5)
+        await testMovie2.addCast(testCast6)
+
+        await testMovie.addCrew(testCrew1)
+        await testMovie.addCrew(testCrew2)
+        await testMovie.addCrew(testCrew3)
+
+        await testMovie2.addCrew(testCrew4)
+        await testMovie2.addCrew(testCrew5)        
+        await testMovie2.addCrew(testCrew6)
+
         const CastList = await testMovie.getCasts()
-        //assert that the list of Casts is length 2
+        const CrewList = await testMovie.getCrews()
+
+        const CastList2 = await testMovie2.getCasts()
+        const CrewList2 = await testMovie2.getCrews()
+
         expect(CastList.length).toBe(3)
-        //assert that the 0th index of the array CastList is an instance of the model Cast
         expect(CastList[0] instanceof Cast).toBeTruthy()
         expect(CastList[0].name).toMatch('Robert Downey Jr.')
         expect(CastList[1].name).toMatch('Chris Evans')
         expect(CastList[2].name).toMatch('Scarlet Johansson')
+
+        expect(CastList2[0].name).toMatch('Sanaa Lathan')
+        expect(CastList2[1].name).toMatch('Morris Chestnut')
+        expect(CastList2[2].name).toMatch('Regina Hall')
+
+        expect(CrewList.length).toBe(3)
+        expect(CrewList[0] instanceof Crew).toBeTruthy()
+        expect(CrewList[0].name).toMatch('Joss Whedon')
+        expect(CrewList[1].name).toMatch('Zak Penn')
+        expect(CrewList[2].name).toMatch('Jon Favreau')
+
+        expect(CrewList2[0].name).toMatch('Malcom Lee')
+        expect(CrewList2[0].name).toMatch('Malcom Lee')
+        expect(CrewList2[2].name).toMatch('John Roberts')
+        
+
+
+
 
     })
 
