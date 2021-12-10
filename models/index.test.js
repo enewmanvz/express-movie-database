@@ -17,7 +17,7 @@ describe('Movie Database', () => {
             {name: 'Robert Downey Jr.', role: 'Iron Man', isStar: true, filmography: 'Actor|Producer|Writer', numfilmCredit: 94},
             {name: 'Chris Evans', role: 'Captain America', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 58},
             {name: 'Scarlet Johansson', role: 'Black Widow', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 74},
-            {name: 'Sanaa Lathan', role: '	Robin', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 49},
+            {name: 'Sanaa Lathan', role: 'Robin', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 49},
             {name: 'Morris Chestnut', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 54},
             {name: 'Regina Hall', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', numfilmCredit: 59},
         ]
@@ -34,21 +34,31 @@ describe('Movie Database', () => {
         await Cast.bulkCreate(arrayOfCasts)
         await Crew.bulkCreate(arrayOfCrews)
     })
-
-    //create instances of Cast Model for testin
-    test('Casts have name', async() => {
+        //create instances of Cast Model for testin
+        test('Casts have name', async() => {
         //read test instance from db
         const testCast = await Cast.findOne({where: {name: 'Robert Downey Jr.'}});
         expect(testCast.name).toBe('Robert Downey Jr.')
     })
 
-    test('Casts have an role', async() => {
+        test('Casts have an role', async() => {
         //read test Cast instance from db
         const testCast = await Cast.findOne({where: {name: 'Robert Downey Jr.'}});
         expect(testCast.role).toBe('Iron Man')
     })
+        //create instances of Crew Model for testin
+        test('Crew have crew has a name', async() => {
+        //read test instance from db
+        const testCrew = await Crew.findOne({where: {name: 'Joss Whedon'}});
+        expect(testCrew.name).toBe('Joss Whedon')
+    })
 
-    test('can create a Movie', async() => {
+        test('Crews have an crewCredit', async() => {
+        //read test instance from db
+        const testCrew = await Crew.findOne({where: {name: 'Joss Whedon'}});
+        expect(testCrew.crewCredit).toBe('Director')
+    })
+        test('can create a Movie', async() => {
         //read test Movie instance from db
         const testMovie = await Movie.findOne({where: {title: 'Avengers'}});
         const testMovie2 = await Movie.findOne({where: {title: 'The Best Man'}});
@@ -56,24 +66,26 @@ describe('Movie Database', () => {
         expect(testMovie2.genre).toBe('Drama')
     })
 
-    test('Movies can have many Casts', async()=> {
+        test('Movies can have many Casts', async()=> {
         //read test Movie instance from db
-        const testMovie = await Movie.findOne({where: {title: 'Avengers'}});
-        //const testMovie2 = await Movie.findOne({where: {title: 'The Best Man'}});
-        //create 2 test instances of Cast
+        const testMovie = await Movie.findOne({where: {title: 'Avengers'}});        
         const testCast1 = await Cast.findOne({where: {name: 'Robert Downey Jr.'}})
         const testCast2 = await Cast.findOne({where: {name: 'Scarlet Johansson'}})
-        //add test Casts to test Movie
-        //magic sequelize add method
+        const testCast3 = await Cast.findOne({where: {name: 'Chris Evans'}})
+
         await testMovie.addCast(testCast1)
         await testMovie.addCast(testCast2)
+        await testMovie.addCast(testCast3)
+
         //retrieve list of Casts in this Movie
         const CastList = await testMovie.getCasts()
         //assert that the list of Casts is length 2
-        expect(CastList.length).toBe(2)
+        expect(CastList.length).toBe(3)
         //assert that the 0th index of the array CastList is an instance of the model Cast
         expect(CastList[0] instanceof Cast).toBeTruthy()
         expect(CastList[0].name).toMatch('Robert Downey Jr.')
+        expect(CastList[1].name).toMatch('Chris Evans')
+        expect(CastList[2].name).toMatch('Scarlet Johansson')
 
     })
 
