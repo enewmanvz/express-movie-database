@@ -8,8 +8,14 @@ describe('Movie Database', () => {
         await sequelize.sync({force:true})
 
         const arrayOfMovies = [
-            {title: 'The Best Man', genre: 'Drama', runtime: 90, releaseDate: '1999-10-10', MPAArating: 'R'},
-            {title: 'Avengers', genre: 'Superhero',runtime: 120, releaseDate: '2012-04-05', MPAArating: 'R'},
+            {title: 'The Best Man', genre: 'Drama', runtime: 90, releaseDate: '1999-10-10', MPAArating: "R"},
+            {title: 'Avengers', genre: 'Superhero',runtime: 120, releaseDate: '2012-04-05', MPAArating: "R"},
+            {title: 'Sherlock Holmes', genre: 'Mystery',runtime: 120, releaseDate: '2012-04-05', MPAArating: "R"},
+            {title: 'Girl`s Trip', genre: 'Comedy',runtime: 120, releaseDate: '2019-04-05', MPAArating: "R"},
+            {title: 'Catch Me If You Can', genre: 'Drama',runtime: 120, releaseDate: '2002-25-12', MPAArating: "R"},
+            {title: 'Forest Gump', genre: 'Drama',runtime: 120, releaseDate: '1994-25-12', MPAArating: "PG-13"},
+            {title: 'The Apprentice', genre: 'Drama',runtime: 120, releaseDate: 'n/a', MPAArating: "n/a"},
+
         ]
 
         const arrayOfCasts =[
@@ -19,6 +25,8 @@ describe('Movie Database', () => {
             {name: 'Sanaa Lathan', role: 'Robin', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 49},
             {name: 'Morris Chestnut', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 54},
             {name: 'Regina Hall', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', numfilmCredit: 59},
+            {name: 'Robin Wright', role: '', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 61},
+
         ]
 
         const arrayOfCrews =[
@@ -85,7 +93,8 @@ describe('Movie Database', () => {
         const testCrew4 = await Crew.findOne({where: {name: 'Malcom Lee'}})
         const testCrew5 = await Crew.findOne({where: {name: 'Malcom D.Lee'}})
         const testCrew6 = await Crew.findOne({where: {name: 'John Roberts'}})
-
+        
+        //associations-add cast and crew to Movie
         await testMovie.addCast(testCast1)
         await testMovie.addCast(testCast2)
         await testMovie.addCast(testCast3)
