@@ -1,11 +1,11 @@
 # About Express Movie Database
 
 <ul>
-  <li>Features</li>
+  #<li>Features</li>
   </ul>
   
   <ul>
-  <li>Technologies Used</li>
+  #<li>Technologies Used</li>
       <li>Jest</li>
       <li>Express</li>
       <li>Sequelize</li>
@@ -13,24 +13,19 @@
   </ul>
   
   <ul>
-  <li>Project Planning</li>
-      <li>...(Screenshot of ERD) & (Screenshot of kanban)Testing</li>
-  </ul>
-  
-  https://enewman01.atlassian.net/jira/software/projects/EMD/boards/1
+  #<li>Project Planning</li>
+   https://enewman01.atlassian.net/jira/software/projects/EMD/boards/1 
+ 
   
   ![image](https://user-images.githubusercontent.com/94469645/145624377-af419ebd-c7da-48d1-a52d-e3137e533026.png)
 
-  <ul>
+  
   <li>Testing</li>
       <li>...(Screenshot of test report)</li>
   </ul>
   
   
-  
-    <ul>
-  <li>Getting Started</li>
-  </ul>
+
   
   
   
