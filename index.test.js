@@ -1,18 +1,17 @@
-//import the associated models from index.js
 const {Cast, Crew, Movie, sequelize} = require('./index')
 
 //test Movie database CRUD
 describe('Movie Database', () => {
 
     beforeAll(async() => {
-        //reset database
+
         await sequelize.sync({force:true})
-        //create array of movies
+
         const arrayOfMovies = [
-            {title: 'The Best Man', genre: 'Drama', runtime: 90, releaseDate: '1999-10-10', mPAArating: 'R'},
-            {title: 'Avengers', genre: 'Superhero',runtime: 120, releaseDate: '2012-04-05', mPAArating: 'R'},
+            {title: 'The Best Man', genre: 'Drama', runtime: 90, releaseDate: '1999-10-10', MPAArating: 'R'},
+            {title: 'Avengers', genre: 'Superhero',runtime: 120, releaseDate: '2012-04-05', MPAArating: 'R'},
         ]
-        //create array of casts
+
         const arrayOfCasts =[
             {name: 'Robert Downey Jr.', role: 'Iron Man', isStar: true, filmography: 'Actor|Producer|Writer', numfilmCredit: 94},
             {name: 'Chris Evans', role: 'Captain America', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 58},
@@ -21,7 +20,7 @@ describe('Movie Database', () => {
             {name: 'Morris Chestnut', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 54},
             {name: 'Regina Hall', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', numfilmCredit: 59},
         ]
-        //create array of crews
+
         const arrayOfCrews =[
            {name: 'Joss Whedon', crewCredit: 'Director', filmography: 'Writer|Producer|Director', knownFor: 'Writer-Buffy the Vampire Slayer', numfilmCredit: 17},
            {name: 'Zak Penn', crewCredit: 'Writer', filmography: 'Writer|Producer|Actor', knownFor: 'Writer-X2: X-Men United', numfilmCredit: 23},
@@ -30,37 +29,37 @@ describe('Movie Database', () => {
            {name: 'Malcom D.Lee', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
            {name: 'John Roberts', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
         ]    
-        //add arrays to database
+
         await Movie.bulkCreate(arrayOfMovies)
         await Cast.bulkCreate(arrayOfCasts)
         await Crew.bulkCreate(arrayOfCrews)
     })
-        //create instances of Cast Model for testin
+
         test('Casts have name', async() => {
-        //read test instance from db
+
         const testCast = await Cast.findOne({where: {name: 'Robert Downey Jr.'}});
         expect(testCast.name).toBe('Robert Downey Jr.')
     })
 
         test('Casts have an role', async() => {
-        //read test Cast instance from db
+
         const testCast = await Cast.findOne({where: {name: 'Robert Downey Jr.'}});
         expect(testCast.role).toBe('Iron Man')
     })
-        //create instances of Crew Model for testin
+
         test('Crew have crew has a name', async() => {
-        //read test instance from db
+
         const testCrew = await Crew.findOne({where: {name: 'Joss Whedon'}});
         expect(testCrew.name).toBe('Joss Whedon')
     })
 
         test('Crews have an crewCredit', async() => {
-        //read test instance from db
+
         const testCrew = await Crew.findOne({where: {name: 'Joss Whedon'}});
         expect(testCrew.crewCredit).toBe('Director')
     })
         test('can create a Movie', async() => {
-        //read test Movie instance from db
+
         const testMovie = await Movie.findOne({where: {title: 'Avengers'}});
         const testMovie2 = await Movie.findOne({where: {title: 'The Best Man'}});
         expect(testMovie.genre).toBe('Superhero')

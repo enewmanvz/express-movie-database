@@ -6,8 +6,8 @@ Movie.init({
     title: DataTypes.STRING,
     genre: DataTypes.STRING,
     runtime: DataTypes.INTEGER,
-    releaseDate: DataTypes.STRING,
-    mPAArating: DataTypes.STRING,
+    releaseDate: DataTypes.DATEONLY,
+    mPAArating: DataTypes.STRING
 }, {
     sequelize,
     timestamps: false

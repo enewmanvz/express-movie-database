@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require(path)
+const path = require('path')
 
 //const {Movie, Cast, Crew} = require('./index')
 const {Movie} = require('./models/movie')
