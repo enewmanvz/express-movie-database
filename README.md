@@ -23,7 +23,19 @@
 
   
 # Testing
-  
+<ul>
+      <li>index.test.js<li>
+         </ul>
+  ![image](https://user-images.githubusercontent.com/94469645/145647373-5fb46a6c-4367-4628-9e94-c73b6d2a7e5d.png)
+      </ul>
+
+      <li>Postman-CRUD<li>
+         </ul>
+  ![image](https://user-images.githubusercontent.com/94469645/145646951-0e4b2f9d-f705-4493-87d2-42da4783a30b.png)
+      
+      
+ ![image](https://user-images.githubusercontent.com/94469645/145649563-6a77a8d7-333a-4692-8a8e-e669636bfb42.png)
+
 
   
   
