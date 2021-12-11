@@ -99,7 +99,8 @@ app.get('/crewmembers/:id', async (req,res) => {
 })
 
 //returns result of a search
-app.get('/search', async (req,res) => {
+//use this format http://localhost:3000/searchcast?castCredit=Leading Lady
+app.get('/searchcast', async (req,res) => {
     //create empty array of casts
     let results = []
     //if they query a name, return all casts with that name
@@ -115,7 +116,8 @@ app.get('/search', async (req,res) => {
 })
 
 //returns result of a search
-app.get('/search', async (req,res) => {
+//use this format http://localhost:3000/searchcrew?crewCredit=Director
+app.get('/searchcrew', async (req,res) => {
     //create empty array of crews
     let results = []
     //if they query a name, return all crews with that name
@@ -124,7 +126,7 @@ app.get('/search', async (req,res) => {
     }
     //if they query an crewCredit, return all crews with that crewCredit
     else if (req.query.crewCredit){
-        results = await Crew.findAll({where:{crewCredit: req.query.crew}})
+        results = await Crew.findAll({where:{crewCredit: req.query.crewCredit}})
     }
     //respond with results as an array of json objects
     res.json(results)
