@@ -33,6 +33,105 @@ app.get('/crews', async (req,res) => {
     res.json(allCrews)
 })
 
+//return one movie by id
+app.get('/movies/:id', async (req,res) => {
+    //find one specific instance of the Musician model by id
+    const thisMovie = await Movie.findByPk(req.params.id)
+    //respond with allMovies as an array of json objects
+    res.json(thisMovie)
+})
+
+//return one cast by id
+app.get('/casts/:id', async (req,res) => {
+    const thisCast = await Cast.findByPk(req.params.id)
+    res.json(thisCast)
+})
+
+//return one crew by id
+app.get('/crews/:id', async (req,res) => {
+    const thisCrew = await Crew.findByPk(req.params.id)
+    res.json(thisCrew)
+})
+
+// return one movie by name
+app.get('/movie-name/:name', async(req,res)=>{
+    //find one specific instance of the Movie model by name
+    const thisMovie = await Movie.findOne({where:{name: req.params.name}})
+    res.json(thisMovie)
+})
+
+// return one cast by name
+app.get('/cast-name/:name', async(req,res)=>{
+    const thisCast = await Cast.findOne({where:{name: req.params.name}})
+    res.json(thisCast)
+})
+
+// return one crew by name
+app.get('/crew-name/:name', async(req,res)=>{
+    const thisCrew = await Crew.findOne({where:{name: req.params.name}})
+    res.json(thisCrew)
+})
+
+//return all casts in a movie
+app.get('/castmembers/:id', async (req,res) => {
+    let results =[]
+    //find the movie with this id
+    const thisMovie = await Movie.findByPk(req.params.id)
+    results.push(thisMovie)
+    //find all Casts in the movie of this id
+    const castsInThisMovie = await Cast.findAll({where: {MovieId: req.params.id}})
+    results.push(castsInThisBand)
+    //respond with musicians as an array of json objects
+    res.json(results)
+})
+
+//return all crews in a band
+app.get('/crewmembers/:id', async (req,res) => {
+    let results =[]
+    //find the band with this id
+    const thisMovie = await Movie.findByPk(req.params.id)
+    results.push(thisMovie)
+    //find all Musicians in the band of this id
+    const crewsInThisMovie = await Crew.findAll({where: {MovieId: req.params.id}})
+    results.push(crewsInThisMovie)
+    //respond with musicians as an array of json objects
+    res.json(results)
+})
+
+//returns result of a search
+app.get('/search', async (req,res) => {
+    //create empty array of casts
+    let results = []
+    //if they query a name, return all casts with that name
+    if (req.query.name){
+        results = await Cast.findAll({where:{name: req.query.name}})
+    }
+    //if they query  crewCredit, return all casts with that crewCredit
+    else if (req.query.castCredit){
+        results = await Cast.findAll({where:{castCredit: req.query.castCredit}})
+    }
+    //respond with results as an array of json objects
+    res.json(results)
+})
+
+//returns result of a search
+app.get('/search', async (req,res) => {
+    //create empty array of crews
+    let results = []
+    //if they query a name, return all crews with that name
+    if (req.query.name){
+        results = await Crew.findAll({where:{name: req.query.name}})
+    }
+    //if they query an crewCredit, return all crews with that crewCredit
+    else if (req.query.crewCredit){
+        results = await Crew.findAll({where:{crewCredit: req.query.crew}})
+    }
+    //respond with results as an array of json objects
+    res.json(results)
+})
+
+
+
 //create new movie
 app.post('/movies', async (req,res) =>{
     let newMovie = await Movie.create(req.body)
@@ -102,6 +201,7 @@ app.delete('/crews/:id', async (req,res) => {
     //use boolen return value from destroy method return to generate a string message
     res.send(deleted ? "Deleted Crew" : "Deletion Failed")
 })
+
 
 
 

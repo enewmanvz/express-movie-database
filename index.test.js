@@ -19,13 +19,13 @@ describe('Movie Database', () => {
         ]
 
         const arrayOfCasts =[
-            {name: 'Robert Downey Jr.', role: 'Iron Man', isStar: true, filmography: 'Actor|Producer|Writer', numfilmCredit: 94},
-            {name: 'Chris Evans', role: 'Captain America', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 58},
-            {name: 'Scarlet Johansson', role: 'Black Widow', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 74},
-            {name: 'Sanaa Lathan', role: 'Robin', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 49},
-            {name: 'Morris Chestnut', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 54},
-            {name: 'Regina Hall', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', numfilmCredit: 59},
-            {name: 'Robin Wright', role: '', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 61},
+            {name: 'Robert Downey Jr.',castCredit: 'Leading Man', role: 'Iron Man', isStar: true, filmography: 'Actor|Producer|Writer', numfilmCredit: 94},
+            {name: 'Chris Evans', castCredit: 'Leading Man', role: 'Captain America', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 58},
+            {name: 'Scarlet Johansson', castCredit: 'Leading Lady', role: 'Black Widow', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 74},
+            {name: 'Sanaa Lathan', castCredit: 'Supporting Actress', role: 'Robin', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 49},
+            {name: 'Morris Chestnut', castCredit: 'Leading Man', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 54},
+            {name: 'Regina Hall', castCredit: 'Supporting Actress', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', numfilmCredit: 59},
+            {name: 'Robin Wright', castCredit: 'null', role: 'null', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 61},
 
         ]
 
