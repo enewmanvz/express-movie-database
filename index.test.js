@@ -8,13 +8,13 @@ describe('Movie Database', () => {
         await sequelize.sync({force:true})
 
         const arrayOfMovies = [
-            {title: 'The Best Man', genre: 'Drama', runtime: 90, releaseDate: '1999-10-10', MPAArating: "R"},
-            {title: 'Avengers', genre: 'Superhero',runtime: 120, releaseDate: '2012-04-05', MPAArating: "R"},
-            {title: 'Sherlock Holmes', genre: 'Mystery',runtime: 120, releaseDate: '2012-04-05', MPAArating: "R"},
-            {title: 'Girl`s Trip', genre: 'Comedy',runtime: 120, releaseDate: '2019-04-05', MPAArating: "R"},
-            {title: 'Catch Me If You Can', genre: 'Drama',runtime: 120, releaseDate: '2002-25-12', MPAArating: "R"},
-            {title: 'Forest Gump', genre: 'Drama',runtime: 120, releaseDate: '1994-25-12', MPAArating: "PG-13"},
-            {title: 'The Apprentice', genre: 'Drama',runtime: 120, releaseDate: 'n/a', MPAArating: "n/a"},
+            {title: 'The Best Man', genre: 'Drama', runtime: 90, released: '1999-10-10', MPAA_rate: "R", movie_id: 1},
+            {title: 'Avengers', genre: 'Superhero',runtime: 120, released: '2012-04-05', MPAA_rate: "R", movie_id: 2},
+            {title: 'Sherlock Holmes', genre: 'Mystery',runtime: 120, released: '2012-04-05', MPAA_rate: "R", movie_id: 3},
+            {title: 'Girl`s Trip', genre: 'Comedy',runtime: 120, released: '2019-04-05', MPAA_rate: "R", movie_id: 4},
+            {title: 'Catch Me If You Can', genre: 'Drama',runtime: 120, released: '2002-25-12', MPAA_rate: "R", movie_id: 5},
+            {title: 'Forest Gump', genre: 'Drama',runtime: 120, released: '1994-25-12', MPAA_rate: "PG-13", movie_id: 6},
+            {title: 'The Apprentice', genre: 'Drama',runtime: 120, released: 'n/a', MPAA_rate: "n/a", movie_id: 7},
 
         ]
 
