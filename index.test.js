@@ -1,3 +1,4 @@
+const { any } = require('sequelize/dist/lib/operators')
 const {Cast, Crew, Movie, sequelize} = require('./index')
 
 //test Movie database CRUD
@@ -19,29 +20,34 @@ describe('Movie Database', () => {
         ]
 
         const arrayOfCasts =[
-            {name: 'Robert Downey Jr.',castCredit: 'Leading Man', role: 'Iron Man', isStar: true, filmography: 'Actor|Producer|Writer', numfilmCredit: 94},
-            {name: 'Chris Evans', castCredit: 'Leading Man', role: 'Captain America', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 58},
-            {name: 'Scarlet Johansson', castCredit: 'Leading Lady', role: 'Black Widow', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 74},
-            {name: 'Sanaa Lathan', castCredit: 'Supporting Actress', role: 'Robin', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 49},
-            {name: 'Morris Chestnut', castCredit: 'Leading Man', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', numfilmCredit: 54},
-            {name: 'Regina Hall', castCredit: 'Supporting Actress', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', numfilmCredit: 59},
-            {name: 'Robin Wright', castCredit: 'null', role: 'null', isStar: false, filmography: 'Actor|Producer|Director', numfilmCredit: 61},
+            {name: 'Robert Downey Jr.',castCredit: 'Leading Man', role: 'Iron Man', isStar: true, filmography: 'Actor|Producer|Writer', credits: 94, movie_id: 2},
+            {name: 'Chris Evans', castCredit: 'Leading Man', role: 'Captain America', isStar: true, filmography: 'Actor|Producer|Director', credits: 58, movie_id: 2},
+            {name: 'Scarlet Johansson', castCredit: 'Leading Lady', role: 'Black Widow', isStar: true, filmography: 'Actor|Producer|Director', credits: 74, movie_id: 2},
+            {name: 'Sanaa Lathan', castCredit: 'Supporting Actress', role: 'Robin', isStar: false, filmography: 'Actor|Producer|Director', credits: 49, movie_id: 1},
+            {name: 'Morris Chestnut', castCredit: 'Leading Man', role: 'Lance Sullivan', isStar: true, filmography: 'Actor|Producer|Director', credits: 54, movie_id: 1},
+            {name: 'Regina Hall', castCredit: 'Supporting Actress', role: 'Candy', isStar: false, filmography: 'Actor|Producer|Soundtrack', credits: 59, movie_id: 1},
+            {name: 'Robin Wright', castCredit: 'null', role: 'null', isStar: false, filmography: 'Actor|Producer|Director', credits: 61, movie_id: 6},
 
         ]
 
         const arrayOfCrews =[
-           {name: 'Joss Whedon', crewCredit: 'Director', filmography: 'Writer|Producer|Director', knownFor: 'Writer-Buffy the Vampire Slayer', numfilmCredit: 17},
-           {name: 'Zak Penn', crewCredit: 'Writer', filmography: 'Writer|Producer|Actor', knownFor: 'Writer-X2: X-Men United', numfilmCredit: 23},
-           {name: 'Jon Favreau', crewCredit: 'Producer', filmography: 'Producer|Actor|Director', knownFor: 'Poducer-Iron Man', numfilmCredit: 32},
-           {name: 'Malcom Lee', crewCredit: 'Director', filmography: 'Director|Producer|Writer', knownFor: "Director-Girl's Trip", numfilmCredit: 20},
-           {name: 'Malcom D.Lee', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
-           {name: 'John Roberts', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", numfilmCredit: 20},
+           {name: 'Joss Whedon', crewCredit: 'Director', filmography: 'Writer|Producer|Director', knownFor: 'Writer-Buffy the Vampire Slayer', credits: 17},
+           {name: 'Zak Penn', crewCredit: 'Writer', filmography: 'Writer|Producer|Actor', knownFor: 'Writer-X2: X-Men United', credits: 23},
+           {name: 'Jon Favreau', crewCredit: 'Producer', filmography: 'Producer|Actor|Director', knownFor: 'Poducer-Iron Man', credits: 32},
+           {name: 'Malcom Lee', crewCredit: 'Director', filmography: 'Director|Producer|Writer', knownFor: "Director-Girl's Trip", credits: 20},
+           {name: 'Malcom D.Lee', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", credits: 20},
+           {name: 'John Roberts', crewCredit: 'Writer', filmography: 'Writer|Producer|Director', knownFor: "Writer-Best Man Holiday", credits: 20},
         ]    
 
         await Movie.bulkCreate(arrayOfMovies)
         await Cast.bulkCreate(arrayOfCasts)
         await Crew.bulkCreate(arrayOfCrews)
     })
+
+        function findCommonElements(arrayOfMovies, arrayOfCrews) {
+            return arrayOfMovies.some(item => arrayOfCrews.includes(item))
+        }
+        document.write(findCommonElements(arrayOfMovies, arrayOfCrews))
 
         test('Casts have name', async() => {
 
@@ -70,6 +76,7 @@ describe('Movie Database', () => {
 
         const testMovie = await Movie.findOne({where: {title: 'Avengers'}});
         const testMovie2 = await Movie.findOne({where: {title: 'The Best Man'}});
+
         expect(testMovie.genre).toBe('Superhero')
         expect(testMovie2.genre).toBe('Drama')
     })

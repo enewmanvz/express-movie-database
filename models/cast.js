@@ -10,7 +10,8 @@ Cast.init({
     castCredit: DataTypes.STRING,
     isStar: DataTypes.BOOLEAN,
     filmography: DataTypes.STRING,
-    numfilmCredit: DataTypes.INTEGER,
+    credits: DataTypes.INTEGER,
+    movie_id: DataTypes.INTEGER
 
 }, {
     sequelize,

@@ -9,7 +9,7 @@ Crew.init({
     crewCredit: DataTypes.STRING,
     filmography: DataTypes.STRING,
     knownFor: DataTypes.STRING,
-    numfilmCredit: DataTypes.INTEGER,
+    credits: DataTypes.INTEGER,
 }, {
     sequelize,
     timestamps: false
