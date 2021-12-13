@@ -8,6 +8,7 @@
       <li>Express</li>
       <li>Sequelize</li>
       <li>SQlite3</li>
+      <li>Postman</li>
   </ul>
   
 # Project Planning
